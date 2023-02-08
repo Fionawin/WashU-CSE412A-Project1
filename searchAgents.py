@@ -288,6 +288,8 @@ class CornersProblem(search.SearchProblem):
         # Please add any code here which you would like to use
         # in initializing the problem
         "*** YOUR CODE HERE ***"
+        # self.startingPosition = startingGameState
+        # self.start = (startingGameState, [])
 
     def getStartState(self):
         """
@@ -295,14 +297,16 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        # self.start = (self.startingGameState, [])
+        # return self.start
 
     def isGoalState(self, state):
         """
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        # Notice: len(self.corners) == 4
+        # return len(self.corners) == len(state[1])
 
     def getSuccessors(self, state):
         """
