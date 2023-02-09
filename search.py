@@ -93,13 +93,13 @@ def depthFirstSearch(problem):
     # print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     start = (problem.getStartState(), [], 0)
     stack.push(start)
-    visited = []
+    visited = set()
     while not stack.isEmpty():
         [state, path, cost] = stack.pop()
         if problem.isGoalState(state):
             return path
         if state not in visited:
-            visited.append(state)
+            visited.add(state)
             for child_state, child_path, child_cost in problem.getSuccessors(state):
                 next_path = path + [child_path]
                 next_cost = cost + child_cost
@@ -111,13 +111,13 @@ def breadthFirstSearch(problem):
     queue = util.Queue()
     start = (problem.getStartState(), [], 0)
     queue.push(start)
-    visited = []
+    visited = set()
     while not queue.isEmpty():
         [state, path, cost] = queue.pop()
         if problem.isGoalState(state):
             return path
         if state not in visited:
-            visited.append(state)
+            visited.add(state)
             for child_state, child_path, child_cost in problem.getSuccessors(state):
                 next_path = path + [child_path]
                 next_cost = cost + child_cost
@@ -129,13 +129,13 @@ def uniformCostSearch(problem):
     queue = util.PriorityQueue()
     start = (problem.getStartState(), [], 0)
     queue.push(start, 0)
-    visited = []
+    visited = set()
     while not queue.isEmpty():
         [state, path, cost] = queue.pop()
         if problem.isGoalState(state):
             return path
         if state not in visited:
-            visited.append(state)
+            visited.add(state)
             for child_state, child_path, child_cost in problem.getSuccessors(state):
                 next_path = path + [child_path]
                 next_cost = cost + child_cost
@@ -155,13 +155,13 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     queue = util.PriorityQueue()
     start = (problem.getStartState(), [], 0)
     queue.push(start, 0)
-    visited = []
+    visited = set()
     while not queue.isEmpty():
         [state, path, cost] = queue.pop()
         if problem.isGoalState(state):
             return path
         if state not in visited:
-            visited.append(state)
+            visited.add(state)
             for child_state, child_path, child_cost in problem.getSuccessors(state):
                 next_path = path + [child_path]
                 next_cost = cost + child_cost

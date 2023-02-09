@@ -288,8 +288,8 @@ class CornersProblem(search.SearchProblem):
         # Please add any code here which you would like to use
         # in initializing the problem
         "*** YOUR CODE HERE ***"
-        # self.startingPosition = startingGameState
-        # self.start = (startingGameState, [])
+        self.startingPosition = startingGameState
+        self.start = (self.startingPosition, ())
 
     def getStartState(self):
         """
@@ -297,8 +297,7 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
-        # self.start = (self.startingGameState, [])
-        # return self.start
+        return self.start
 
     def isGoalState(self, state):
         """
@@ -306,7 +305,7 @@ class CornersProblem(search.SearchProblem):
         """
         "*** YOUR CODE HERE ***"
         # Notice: len(self.corners) == 4
-        # return len(self.corners) == len(state[1])
+        return len(state[1]) == len(self.corners)
 
     def getSuccessors(self, state):
         """
@@ -329,8 +328,22 @@ class CornersProblem(search.SearchProblem):
             #   hitsWall = self.walls[nextx][nexty]
 
             "*** YOUR CODE HERE ***"
+            # self.start = [self.startingPosition, ()]
+            x, y = state[0]
+            dx, dy = Actions.directionToVector(action)
+            nextx, nexty = int(x + dx), int(y + dy)
+            hitsWall = self.walls[nextx][nexty]
+            if not hitsWall:
+                next_position = (nextx, nexty)
+                next_state = (next_position, state[1])
+                if next_position in self.corners:
+                    if next_position not in state[1]:
+                        visited = state[1] + (next_position,)
+                        next_state = (next_position, visited)
+                        # print(next_state)
+                successors.append((next_state, action, 1))
 
-        self._expanded += 1 # DO NOT CHANGE
+        self._expanded += 1  # DO NOT CHANGE
         return successors
 
     def getCostOfActions(self, actions):
